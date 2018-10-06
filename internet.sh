@@ -22,7 +22,7 @@ clear
 case $CHOICE in
         1) exec ./sin_internet.sh ;;
         2) exec ./con_internet.sh ;;
-        3) exec ./permitir_ips.sh ;;
+        3) exec ./permitir_macs.sh ;;
         4) exec ./permitir_urls.sh ;;
         5) exec ./denegar_ips.sh ;;
         6) exec ./apagar.sh ;;

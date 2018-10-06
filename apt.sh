@@ -6,3 +6,8 @@ fi
 if ! hash netdiscover 2>/dev/null; then
    sudo apt install netdiscover
 fi
+
+if ! hash ebtables 2>/dev/null; then
+   sudo apt install ebtables
+fi
+
