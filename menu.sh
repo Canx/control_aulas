@@ -2,19 +2,18 @@
 source ./default.sh
 
 # check if iface.cfg exists
-if [ ! -f ./iface.cfg ]; then
-   $DIALOG --msgbox "No se ha configurado el interfaz de red!" $HEIGHT $WIDTH
-   ./iface.sh
-   exec ./menu.sh
-fi
-# check if network.cfg exists
 if [ ! -f ./network.cfg ]; then
-   $DIALOG --msgbox "No se ha configurado la dirección de red!" $HEIGHT $WIDTH
-   ./network.sh
+   $DIALOG --msgbox "No se ha configurado la red!" $HEIGHT $WIDTH
+   ./iface.sh
    exec ./menu.sh
 fi
 
 # check if macs.data exists
+if [ ! -f ./macs.data ]; then
+   $DIALOG --msgbox "No se ha explorado la red!" $HEIGHT $WIDTH
+   ./netdiscover.sh
+   exec ./menu.sh
+fi
 
 OPTIONS=(1 "Quitar Internet a todos"
          2 "Dar Internet a todos"
