@@ -1,12 +1,7 @@
 #!/bin/bash
-export TERM=xterm
-cd "$(dirname "$0")"
-HEIGHT=15
-WIDTH=40
-CHOICE_HEIGHT=5
-BACKTITLE="Control de Internet, por Ruben Cancho. V1.1"
+source ./default.sh
+
 TITLE="Configuración"
-MENU="Elige una opción:"
 
 OPTIONS=(1 "Configurar interface"
          2 "Escanear MACS"
@@ -24,6 +19,11 @@ clear
 
 case $CHOICE in
         1) exec ./iface.sh ;;
-        2) exec ./scan_macs.sh ;;
+        2) exec ./netdiscover.sh ;;
         3) exec ./asign_pos.sh ;;
 esac
+
+if test $? -eq 0
+then
+   exec ./control_aulas.sh
+fi

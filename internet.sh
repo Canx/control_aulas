@@ -1,20 +1,6 @@
 #!/bin/bash
 source ./default.sh
 
-# check if iface.cfg exists
-if [ ! -f ./network.cfg ]; then
-   $DIALOG --msgbox "No se ha configurado la red!" $HEIGHT $WIDTH
-   ./iface.sh
-   exec ./menu.sh
-fi
-
-# check if macs.data exists
-if [ ! -f ./macs.data ]; then
-   $DIALOG --msgbox "No se ha explorado la red!" $HEIGHT $WIDTH
-   ./netdiscover.sh
-   exec ./menu.sh
-fi
-
 OPTIONS=(1 "Quitar Internet a todos"
          2 "Dar Internet a todos"
          3 "Permitir IPs de alumnos"
@@ -23,7 +9,7 @@ OPTIONS=(1 "Quitar Internet a todos"
          6 "Apagar ordenadores")
 
 
-CHOICE=$($DIALOG --clear \
+CHOICE=$(dialog --clear \
                 --backtitle "$BACKTITLE" \
                 --title "$TITLE" \
                 --menu "$MENU" \
@@ -41,3 +27,8 @@ case $CHOICE in
         5) exec ./denegar_ips.sh ;;
         6) exec ./apagar.sh ;;
 esac
+
+if test $? -eq 0
+then
+    exec ./control_aulas.sh
+fi

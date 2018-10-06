@@ -1,6 +1,7 @@
 # Do not execute directly, only to include in other bash scripts!
 VERSION="1.1"
 
+OUTPUT="/tmp/input.txt"
 export TERM=xterm
 DIALOG=${DIALOG=dialog}
 cd "$(dirname "$0")"

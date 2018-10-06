@@ -26,3 +26,5 @@ do
         echo "NETWORK=${element#*:}" >> network.cfg
     fi
 done
+
+exec ./configurar.sh
