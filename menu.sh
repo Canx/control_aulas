@@ -1,12 +1,20 @@
 #!/bin/bash
-export TERM=xterm
-cd "$(dirname "$0")"
-HEIGHT=15
-WIDTH=40
-CHOICE_HEIGHT=5
-BACKTITLE="Control de Internet, por Ruben Cancho. V1.1"
-TITLE="Menu principal"
-MENU="Elige una opción:"
+source ./default.sh
+
+# check if iface.cfg exists
+if [ ! -f ./iface.cfg ]; then
+   $DIALOG --msgbox "No se ha configurado el interfaz de red!" $HEIGHT $WIDTH
+   ./iface.sh
+   exec ./menu.sh
+fi
+# check if network.cfg exists
+if [ ! -f ./network.cfg ]; then
+   $DIALOG --msgbox "No se ha configurado la dirección de red!" $HEIGHT $WIDTH
+   ./network.sh
+   exec ./menu.sh
+fi
+
+# check if macs.data exists
 
 OPTIONS=(1 "Quitar Internet a todos"
          2 "Dar Internet a todos"
@@ -16,7 +24,7 @@ OPTIONS=(1 "Quitar Internet a todos"
          6 "Apagar ordenadores")
 
 
-CHOICE=$(dialog --clear \
+CHOICE=$($DIALOG --clear \
                 --backtitle "$BACKTITLE" \
                 --title "$TITLE" \
                 --menu "$MENU" \
